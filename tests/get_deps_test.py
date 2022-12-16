@@ -1,6 +1,6 @@
-from get_deps import get_deps
+from get_py_deps import get_py_deps
 
 
-def test_get_deps():
-    table = get_deps.get_deps("get-deps")
-    print(table)
+def test_field_names():
+    table = get_py_deps.get_py_deps("get-deps")
+    assert table.field_names == ["Package", "License", "Url"]

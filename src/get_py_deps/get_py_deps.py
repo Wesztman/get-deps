@@ -26,7 +26,7 @@ def _get_pkg_home_page(pkg):
     return "(Homepage not found)"
 
 
-def get_deps(package_name: str) -> PrettyTable:
+def get_py_deps(package_name: str) -> PrettyTable:
     """Print all dependencies which are required with their licenses and home page."""
     pkg_requires = pkg_resources.working_set.by_key[package_name].requires()
     table = PrettyTable(["Package", "License", "Url"])
