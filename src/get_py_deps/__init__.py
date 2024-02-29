@@ -1,1 +1,1 @@
-from get_py_deps import *
+from . import get_py_deps
