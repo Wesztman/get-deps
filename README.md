@@ -1,4 +1,4 @@
-# Get Py Deps
+# get-py-deps
 
 A Python module to pretty print a table with the dependencies of a Python package with license and url.
 
@@ -31,6 +31,8 @@ Which will output a table with the licenses and urls which were found as depende
 ```
 
 Note that the package and its dependencies needs to be installed in the environment where the command is run.
+
+Use case could be that you want to add an option to your own CLI tool to list the dependencies of your tool.
 
 <p>
   <h1 align="right"><b>🦆<img src="" alt="" width="100"></h1>
