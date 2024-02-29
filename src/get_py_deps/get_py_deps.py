@@ -29,7 +29,7 @@ def _get_pkg_home_page(pkg):
 
 
 def get_py_deps(package_name: str) -> PrettyTable:
-    """Print all dependencies which are required with their licenses and home page."""
+    """Returns a PrettyTable with all dependencies which are required with their licenses and home page."""
     pkg_requires = pkg_resources.working_set.by_key[package_name].requires()
     logging.debug(f"Package {package_name} requires {pkg_requires}")
     table = PrettyTable(["Package", "License", "Url"])
