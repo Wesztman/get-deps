@@ -2,10 +2,18 @@
 
 A Python module to pretty print a table with the dependencies of a Python package with license and url.
 
-Can both be used in your code with `from get_py_deps import get_py_deps` or as a command line tool as.
+Can both be used in your code with
 
 ```bash
-$ get_py_deps sphinx
+from get_py_deps import get_py_deps
+
+print(get_py_deps.get_py_deps(__name__)) # Can be any installed package name, __name__ contains the name of the current module (self)
+```
+
+or from the command line as
+
+```bash
+$ get-py-deps sphinx
 ```
 
 Which will output a table with the licenses and urls which were found as dependencies to that package.
