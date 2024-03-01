@@ -1,7 +1,7 @@
 # get-py-deps
 [![Tox and publish releas](https://github.com/Wesztman/get-py-deps/actions/workflows/tox-and-publish.yml/badge.svg)](https://github.com/Wesztman/get-py-deps/actions/workflows/tox-and-publish.yml)
 [![PyPI Version](https://img.shields.io/pypi/v/get-py-deps.svg)](https://pypi.python.org/pypi/get-py-deps)
-![Python Versions](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue
+![Python Versions](https://img.shields.io/badge/Python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue
 )
 ![Tested on OS](https://img.shields.io/badge/OS-win%20%7C%20linux%20%7C%20mac-orange)
 
