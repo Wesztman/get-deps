@@ -1,10 +1,18 @@
 # get-py-deps
 A Python module to pretty print a table with the dependencies of a Python package with license and url.
 
-Can both be used in your code with `from get_py_deps import get_py_deps` or as a command line tool as.
+Can both be used in your code with
 
 ```bash
-$ get_py_deps sphinx
+from get_py_deps import get_py_deps
+
+print(get_py_deps(__name__)) # Can be any installed package name, __name__ contains the name of the current module (self)
+```
+
+or from the command line as
+
+```bash
+$ get-py-deps sphinx
 ```
 
 Which will output a table with the licenses and urls which were found as dependencies to that package.
@@ -32,6 +40,32 @@ Which will output a table with the licenses and urls which were found as depende
 Note that the package and its dependencies needs to be installed in the environment where the command is run.
 
 Use case could be that you want to add an option to your own CLI tool to list the dependencies of your tool.
+
+# Development
+
+Development is easiest done using the provided dev container. This will ensure that the development environment is consistent across different machines.
+
+The dev container will install all development dependencies and set up the pre-commit hooks used in this project.
+
+To run all tests and checks, simply run [tox](https://tox.readthedocs.io/en/latest/).
+
+```bash
+$ tox
+```
+
+### Pre-requisites
+
+- [Docker](https://www.docker.com/products/docker-desktop)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Visual Studio Code - Dev Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
+# GitHub Action Workflow
+
+The GitHub Action workflow is set up to run the tests and checks on every push, pr and release.
+
+It runs the tox workflow for all supported Python versions on windows, mac and linux.
+
+When creating a release from a tag (x.y.z), the workflow will also build and push the Python package to PyPi.
 
 <p>
   <h1 align="right"><b>🦆<img src="" alt="" width="100"></h1>
