@@ -10,13 +10,12 @@ name = "get-py-deps"
 description = ""
 readme = "README.md"
 requires-python = ">=3.9"
-dependencies = ["prettytable"]
+dependencies = ["prettytable~=3.10.0", "setuptools~=69.1.1"]
 dynamic = ["version"]
 
 [project.optional-dependencies]
-lint = ["ruff~=0.2.1", "mypy~=1.8.0"]
+lint = ["ruff~=0.2.1", "mypy~=1.8.0", "types-setuptools>=69.1.0.20240229"]
 test = ["pytest~=8.0.0", "pytest-cov~=4.1.0", "coverage[toml]~=7.4.1"]
-pipeline-test = ["pytest-azurepipelines~=1.0.5", "get-py-deps[test]"]
 dev = [
     "tox~=4.12.1",
     "tox-pdm~=0.7.2",
@@ -24,14 +23,15 @@ dev = [
     "get-py-deps[lint]",
     "get-py-deps[test]",
 ]
+
 [tool.pytest.ini_options]
 log_cli = true
-log_cli_level = "INFO"
+log_cli_level = "DEBUG"
 log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 
 [project.scripts]
-get-py-deps = "get_py_deps.get_py_deps:_cli"
+get-py-deps = "get_py_deps.main:_cli"
 
 [project.urls]
 Repository = "https://github.com/Wesztman/get-py-deps"
@@ -39,9 +39,9 @@ Repository = "https://github.com/Wesztman/get-py-deps"
 [tool.pdm.scripts]
 format = "pdm run ruff format . --check"
 lint = "pdm run ruff check . --fix"
-typecheck = "mypy ."                                                                                                                             # Uncomment after fixing type errors
-test = "pdm run pytest tests/ -v --cov src/chargify --cov-report term --cov-report html"
-pipeline-test = "pdm run pytest tests/ --cov chargify --cov-report xml --cov-report html --junitxml junit/test-results.xml --no-coverage-upload"
+typecheck = "mypy ."                                                                                                                                # Uncomment after fixing type errors
+test = "pdm run pytest tests/ -v --cov src/get_py_deps --cov-report term --cov-report html"
+pipeline-test = "pdm run pytest tests/ --cov get_py_deps --cov-report xml --cov-report html --junitxml junit/test-results.xml --no-coverage-upload"
 all = { composite = ["format", "lint", "test", "typecheck"] }
 
 [tool.ruff]

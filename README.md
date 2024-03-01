@@ -1,5 +1,5 @@
 # get-py-deps
-
+[hej](https://teams.microsoft.com/l/message/19:39332e3b7d07494cb6538087dbf4b766@thread.tacv2/1709222249247?tenantId=41edc297-cc3a-4756-9da1-a9eb6b1ca80d&groupId=4698f074-afd7-43d1-9030-f8e023844d58&parentMessageId=1709222249247&teamName=Product%20Development&channelName=%F0%9F%93%A2%20Announcements%20%F0%9F%93%A2&createdTime=1709222249247)
 A Python module to pretty print a table with the dependencies of a Python package with license and url.
 
 Can both be used in your code with `from get_py_deps import get_py_deps` or as a command line tool as.
