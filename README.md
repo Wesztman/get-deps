@@ -47,7 +47,9 @@ Development is easiest done using the provided dev container. This will ensure t
 
 The dev container will install all development dependencies and set up the pre-commit hooks used in this project.
 
-To run all tests and checks, simply run [tox](https://tox.readthedocs.io/en/latest/).
+To ensure dependency consistency and easy testing, this project uses [PDM](https://pdm-project.org/latest/) and [tox](https://tox.readthedocs.io/en/latest/).
+
+To run all tests and checks, simply run tox from the command line.
 
 ```bash
 $ tox
