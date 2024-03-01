@@ -37,7 +37,5 @@ jobs:
       - name: Install tox
         run: |
           pip install tox tox-pdm
-      - name: Setup test suite
-        run: tox -vv --notest
-      - name: Run test suite
-        run: tox -p --skip-pkg-install
+      - name: Run tox
+        run: tox -p
