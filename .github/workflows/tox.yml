@@ -34,10 +34,10 @@ jobs:
           python-version: ${{ matrix.py }}
       - name: Setup PDM
         uses: pdm-project/setup-pdm@v4
-      - name: Install dependencies
+      - name: Install tox
         run: |
-          pdm sync -G dev
+          pip install tox tox-pdm
       - name: Setup test suite
-        run: pdm run tox -vv --notest
+        run: tox -vv --notest
       - name: Run test suite
-        run: pdm run tox --skip-pkg-install
+        run: tox --skip-pkg-install
