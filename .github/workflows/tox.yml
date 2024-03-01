@@ -38,6 +38,6 @@ jobs:
         run: |
           pdm sync -G dev
       - name: Setup test suite
-        run: tox -vv --notest
+        run: pdm run tox -vv --notest
       - name: Run test suite
-        run: tox --skip-pkg-install
+        run: pdm run tox --skip-pkg-install
