@@ -1,25 +1,28 @@
 [build-system]
-requires = ["setuptools>=65.6.3", "setuptools-git-versioning>=1.13.1"]
-build-backend = "setuptools.build_meta"
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
 
-[tool.setuptools-git-versioning]
-enabled = true
+[tool.pdm.version]
+source = "scm"
 
 [project]
 name = "get-py-deps"
 description = ""
 readme = "README.md"
-requires-python = ">=3.6"
-dependencies = [
-    "setuptools-git-versioning>=1.13.0",
-    "build>=0.9.0",
-    "prettytable",
-]
+requires-python = ">=3.9"
+dependencies = ["prettytable~=3.10.0", "setuptools~=69.1.1"]
 dynamic = ["version"]
 
 [project.optional-dependencies]
-dev = ["pytest==6.2.5", "black==21.9b0"]
-doc = ["sphinx==5.2.0", "sphinx-click==4.4.0", "sphinx-rtd-theme==1.1.1"]
+lint = ["ruff~=0.2.1", "mypy~=1.8.0", "types-setuptools>=69.1.0.20240229"]
+test = ["pytest~=8.0.0", "pytest-cov~=4.1.0", "coverage[toml]~=7.4.1"]
+dev = [
+    "tox~=4.12.1",
+    "tox-pdm~=0.7.2",
+    "pre-commit~=3.6.1",
+    "get-py-deps[lint]",
+    "get-py-deps[test]",
+]
 
 [tool.pytest.ini_options]
 log_cli = true
@@ -28,7 +31,55 @@ log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(linen
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 
 [project.scripts]
-get-py-deps = "get_py_deps.get_py_deps:_cli"
+get-py-deps = "get_py_deps.main:_cli"
 
 [project.urls]
 Repository = "https://github.com/Wesztman/get-py-deps"
+
+[tool.pdm.scripts]
+format = "pdm run ruff format . --check"
+lint = "pdm run ruff check . --fix"
+typecheck = "mypy ."                                                                                                                                # Uncomment after fixing type errors
+test = "pdm run pytest tests/ -v --cov src/get_py_deps --cov-report term --cov-report html"
+pipeline-test = "pdm run pytest tests/ --cov get_py_deps --cov-report xml --cov-report html --junitxml junit/test-results.xml --no-coverage-upload"
+all = { composite = ["format", "lint", "test", "typecheck"] }
+
+[tool.ruff]
+src = ["src"]
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+
+[tool.ruff.lint.extend-per-file-ignores]
+"tests/**" = [
+    "S101", # Use of `assert` detected
+    "D103", # Missing docstring in public function
+]
+"**/__init__.py" = [
+    "F401", # Imported but unused
+    "F403", # Wildcard imports
+]
+"docs/**" = [
+    "INP001", # Requires __init__.py but docs folder is not a package.
+]
+
+[tool.mypy]
+disallow_untyped_defs = true
+warn_unused_ignores = true
+exclude = [".venv/", "dist/", "tests/"]
+
+[tool.coverage.run]
+omit = ["*tests*"]

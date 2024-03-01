@@ -130,3 +130,6 @@ dmypy.json
 
 # esphome compile output
 .esphome/
+
+# PDM
+.pdm-python
