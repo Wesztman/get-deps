@@ -3,7 +3,7 @@
 [![PyPI Version](https://img.shields.io/pypi/v/get-py-deps.svg)](https://pypi.python.org/pypi/get-py-deps)
 ![Python Versions](https://img.shields.io/badge/python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue
 )
-![Tested on OS](https://img.shields.io/badge/os-win%20%7C%20linux%20%7C%20mac-orange)
+![Tested on OS](https://img.shields.io/badge/OS-win%20%7C%20linux%20%7C%20mac-orange)
 
 
 A Python module to pretty print a table with the dependencies of a Python package with license and url.
