@@ -38,4 +38,4 @@ jobs:
         run: |
           pip install tox tox-pdm
       - name: Run tox
-        run: tox -p
+        run: tox
