@@ -87,3 +87,4 @@ omit = ["*tests*"]
 [tool.pyright]
 venvPath = "."
 venv = ".venv"
+extraPaths = [".tox"]
