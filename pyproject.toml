@@ -83,3 +83,7 @@ exclude = [".venv/", "dist/", "tests/"]
 
 [tool.coverage.run]
 omit = ["*tests*"]
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"

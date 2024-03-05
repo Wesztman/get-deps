@@ -26,3 +26,11 @@ repos:
     rev: "v1.4.0"
     hooks:
       - id: detect-secrets
+  - repo: https://github.com/pdm-project/pdm
+    rev: 2.12.4
+    hooks:
+      - id: pdm-lock-check
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.352
+    hooks:
+      - id: pyright
