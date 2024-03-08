@@ -32,17 +32,22 @@ jobs:
           fetch-depth: 0
       - name: Setup python for test ${{ matrix.py }}
         uses: actions/setup-python@v5
+        id: setup-python
         with:
           python-version: ${{ matrix.py }}
       - name: Setup PDM
         uses: pdm-project/setup-pdm@v4
       - name: Print python version
-        run: python --version
-    #   - name: Install tox
-    #     run: |
-    #       pip install tox tox-pdm
+        run: |
+          python --version
+          ${{ steps.setup-python.outputs.python-path }} --version
+      #   - name: Install tox
+      #     run: |
+      #       pip install tox tox-pdm
       - name: Run pdm script
-        run: pdm run all
+        run: |
+          pdm use --python ${{ steps.setup-python.outputs.python-path }}
+          pdm run all
 
   deploy:
     runs-on: ubuntu-latest
