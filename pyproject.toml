@@ -39,6 +39,7 @@ Repository = "https://github.com/Wesztman/get-py-deps"
 # Misc
 _add-title.shell = "echo '\\e[35m##################################### {args} #####################################\\e[0m'"
 _print-python-version.shell = "python --version"
+_print-success.shell = "echo '\n\\e[32m{args}\\e[0m'"
 # Runs before each pdm run command
 pre_run = { composite = [
     "_add-title 'Checking dependencies'",
@@ -53,7 +54,7 @@ test = { composite = [
 # Linting
 _precommit = { shell = "pre-commit run --all-files" } # incl. ruff lint, ruff format, and lock file check
 _mypy-typecheck = { shell = "mypy ." }
-_pyright-typecheck = { shell = "pyright" }
+_pyright-typecheck = { shell = "pyright ." }
 lint = { composite = [
     "_add-title 'Running linting'",
     "_precommit",
@@ -70,6 +71,7 @@ all = { composite = [
     "lint",
     "test",
     "build",
+    "_print-success '🎉🎉 All checks passed 🎉🎉'",
 ], help = "Run all tests and checks, as well as building the package" }
 _pipeline-checks = { composite = [
     "lint",
