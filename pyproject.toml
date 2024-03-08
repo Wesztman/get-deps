@@ -9,12 +9,17 @@ source = "scm"
 name = "get-py-deps"
 description = ""
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = ["prettytable~=3.10.0", "setuptools~=69.1.1"]
 dynamic = ["version"]
 
 [project.optional-dependencies]
-lint = ["ruff~=0.2.1", "mypy~=1.8.0", "types-setuptools>=69.1.0.20240229"]
+lint = [
+    "ruff~=0.2.1",
+    "mypy~=1.8.0",
+    "types-setuptools~=69.1.0.20240229",
+    "pyright~=1.1.352",
+]
 test = ["pytest~=8.0.0", "pytest-cov~=4.1.0", "coverage[toml]~=7.4.1"]
 dev = ["pre-commit~=3.6.1", "get-py-deps[lint]", "get-py-deps[test]"]
 
@@ -48,10 +53,12 @@ test = { composite = [
 # Linting
 _precommit = { shell = "pre-commit run --all-files" } # incl. ruff lint, ruff format, and lock file check
 _mypy-typecheck = { shell = "mypy ." }
+_pyright-typecheck = { shell = "pyright" }
 lint = { composite = [
     "_add-title 'Running linting'",
     "_precommit",
     "_mypy-typecheck",
+    "_pyright-typecheck",
 ], help = "Run linting incl. pre-commit, typechecks, ruff format, lint and lock file check" }
 # Build
 build = { composite = [

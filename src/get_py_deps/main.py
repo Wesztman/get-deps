@@ -67,7 +67,7 @@ def _parse_args(args: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument(
         "-v", "--verbose", action="store_true", help="Enable verbose output."
     )
-    return parser.parse_args(args)
+    return parser.parse_args(args=args)
 
 
 # Cli function, use argparse to parse the argument package_name and call get_py_deps
