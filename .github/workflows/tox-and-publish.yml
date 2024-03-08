@@ -1,4 +1,4 @@
-name: Tox and publish release
+name: Test and publish release
 
 on:
   push:
@@ -36,11 +36,13 @@ jobs:
           python-version: ${{ matrix.py }}
       - name: Setup PDM
         uses: pdm-project/setup-pdm@v4
-      - name: Install tox
-        run: |
-          pip install tox tox-pdm
-      - name: Run tox
-        run: tox
+      - name: Print python version
+        run: python --version
+    #   - name: Install tox
+    #     run: |
+    #       pip install tox tox-pdm
+      - name: Run pdm script
+        run: pdm run all
 
   deploy:
     runs-on: ubuntu-latest
