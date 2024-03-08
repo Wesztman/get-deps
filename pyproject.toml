@@ -9,20 +9,19 @@ source = "scm"
 name = "get-py-deps"
 description = ""
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = ["prettytable~=3.10.0", "setuptools~=69.1.1"]
 dynamic = ["version"]
 
 [project.optional-dependencies]
-lint = ["ruff~=0.2.1", "mypy~=1.8.0", "types-setuptools>=69.1.0.20240229"]
-test = ["pytest~=8.0.0", "pytest-cov~=4.1.0", "coverage[toml]~=7.4.1"]
-dev = [
-    "tox~=4.12.1",
-    "tox-pdm~=0.7.2",
-    "pre-commit~=3.6.1",
-    "get-py-deps[lint]",
-    "get-py-deps[test]",
+lint = [
+    "ruff~=0.2.1",
+    "mypy~=1.8.0",
+    "types-setuptools~=69.1.0.20240229",
+    "pyright~=1.1.352",
 ]
+test = ["pytest~=8.0.0", "pytest-cov~=4.1.0", "coverage[toml]~=7.4.1"]
+dev = ["pre-commit~=3.6.1", "get-py-deps[lint]", "get-py-deps[test]"]
 
 [tool.pytest.ini_options]
 log_cli = true
@@ -37,13 +36,48 @@ get-py-deps = "get_py_deps.main:_cli"
 Repository = "https://github.com/Wesztman/get-py-deps"
 
 [tool.pdm.scripts]
-format = "pdm run ruff format . --check"
-lint = "pdm run ruff check . --fix"
-typecheck = "mypy ."                                                                                                                                # Uncomment after fixing type errors
-test = "pdm run pytest tests/ -v --cov src/get_py_deps --cov-report term --cov-report html"
-pipeline-test = "pdm run pytest tests/ --cov get_py_deps --cov-report xml --cov-report html --junitxml junit/test-results.xml --no-coverage-upload"
-all = { composite = ["format", "lint", "test", "typecheck"] }
-
+# Misc
+_add-title.shell = "echo '\\e[35m##################################### {args} #####################################\\e[0m'"
+_print-python-version.shell = "python --version"
+_print-success.shell = "echo '\n\\e[32m{args}\\e[0m'"
+# Runs before each pdm run command
+pre_run = { composite = [
+    "_add-title 'Checking dependencies'",
+    "pdm sync -G dev",
+    "_print-python-version",
+], help = "Check and install dependencies, run automatically before each `pdm run`" }
+# Test
+test = { composite = [
+    "_add-title 'Running Pytest'",
+    "pytest {args:tests/ --cov src/get_py_deps --cov-report term --cov-report html}",
+], help = "Run pytest with coverage report" }
+# Linting
+_precommit = { shell = "pre-commit run --all-files" } # incl. ruff lint, ruff format, and lock file check
+_mypy-typecheck = { shell = "mypy ." }
+_pyright-typecheck = { shell = "pyright ." }
+lint = { composite = [
+    "_add-title 'Running linting'",
+    "_precommit",
+    "_mypy-typecheck",
+    "_pyright-typecheck",
+], help = "Run linting incl. pre-commit, typechecks, ruff format, lint and lock file check" }
+# Build
+build = { composite = [
+    "_add-title 'Building package'",
+    "pdm build",
+], help = "Build the package in the dist/ directory" }
+# Run all checks
+all = { composite = [
+    "lint",
+    "test",
+    "build",
+    "_print-success '🎉🎉 All checks passed 🎉🎉'",
+], help = "Run all tests and checks, as well as building the package" }
+_pipeline-checks = { composite = [
+    "lint",
+    "test --cov src/get_py_deps --cov-report xml --cov-report html --junitxml junit/test-results.xml --no-coverage-upload",
+    "build",
+] }
 [tool.ruff]
 src = ["src"]
 

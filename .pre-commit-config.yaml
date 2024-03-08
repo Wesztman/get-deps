@@ -16,12 +16,6 @@ repos:
         args: [--fix]
       # Run the formatter.
       - id: ruff-format
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.5.1
-    hooks:
-      - id: mypy
-        exclude: ^tests/
-        additional_dependencies: [types-setuptools>=69.1.0.20240229]
   - repo: https://github.com/Yelp/detect-secrets
     rev: "v1.4.0"
     hooks:
@@ -30,8 +24,3 @@ repos:
     rev: 2.12.4
     hooks:
       - id: pdm-lock-check
-  - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.352
-    hooks:
-      - id: pyright
-        additional_dependencies: [prettytable>=3.10.0]
