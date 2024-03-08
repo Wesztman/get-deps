@@ -37,16 +37,11 @@ jobs:
           python-version: ${{ matrix.py }}
       - name: Setup PDM
         uses: pdm-project/setup-pdm@v4
-      - name: Print python version
-        run: |
-          python --version
-          ${{ steps.setup-python.outputs.python-path }} --version
-      #   - name: Install tox
-      #     run: |
-      #       pip install tox tox-pdm
+        with:
+          python-version: ${{ matrix.py }}
+          cache: true
       - name: Run pdm script
         run: |
-          pdm use ${{ steps.setup-python.outputs.python-path }}
           pdm run python --version
           pdm run all
 

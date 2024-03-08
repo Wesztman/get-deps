@@ -8,10 +8,7 @@
             "version": "20.11.1"
         }
     },
-    "postCreateCommand": "pdm sync -G dev && pdm run pre-commit install",
-    "containerEnv": {
-        "PDM_PYTHON": "${workspaceFolder}/.venv/bin/python"
-    },
+    "postCreateCommand": "pdm run pre-commit install --install-hooks && echo '\n📢📢 Call `pdm run all` to run all checks and tests, or use the provided test task from the VSCode command palette 📢📢'",
     "customizations": {
         "vscode": {
             "extensions": [

@@ -17,8 +17,6 @@ dynamic = ["version"]
 lint = ["ruff~=0.2.1", "mypy~=1.8.0", "types-setuptools>=69.1.0.20240229"]
 test = ["pytest~=8.0.0", "pytest-cov~=4.1.0", "coverage[toml]~=7.4.1"]
 dev = [
-    "tox~=4.12.1",
-    "tox-pdm~=0.7.2",
     "pre-commit~=3.6.1",
     "get-py-deps[lint]",
     "get-py-deps[test]",

@@ -1,5 +1,5 @@
 # get-py-deps
-[![Tox and publish release](https://github.com/Wesztman/get-py-deps/actions/workflows/tox-and-publish.yml/badge.svg)](https://github.com/Wesztman/get-py-deps/actions/workflows/tox-and-publish.yml)
+[![Test and publish release](https://github.com/Wesztman/get-py-deps/actions/workflows/test-and-publish.yml/badge.svg)](https://github.com/Wesztman/get-py-deps/actions/workflows/test-and-publish.yml)
 [![PyPI Version](https://img.shields.io/pypi/v/get-py-deps.svg)](https://pypi.python.org/pypi/get-py-deps)
 ![Python Versions](https://img.shields.io/badge/Python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue
 )
@@ -56,12 +56,18 @@ Development is easiest done using the provided dev container. This will ensure t
 
 The dev container will install all development dependencies and set up the pre-commit hooks used in this project.
 
-To ensure dependency consistency and easy testing, this project uses [PDM](https://pdm-project.org/latest/) and [tox](https://tox.readthedocs.io/en/latest/).
+To ensure dependency consistency and easy testing, this project uses [PDM](https://pdm-project.org/latest/).
 
-To run all tests and checks, simply run tox from the command line.
+To run all tests and checks, simply run the supplied pdm script from the command line.
 
 ```bash
-$ tox
+$ pdm run all
+```
+
+For a full list of available commands, run:
+
+```bash
+$ pdm run -l
 ```
 
 ### Pre-requisites
@@ -74,7 +80,7 @@ $ tox
 
 The GitHub Action workflow is set up to run the tests and checks on every push, pr and release.
 
-It runs the tox workflow for all supported Python versions on windows, mac and linux.
+It runs the `pdm run all` scrips for all supported Python versions on windows, mac and linux.
 
 When creating a release from a tag (x.y.z), the workflow will also build and push the Python package to PyPi.
 
