@@ -46,7 +46,8 @@ jobs:
       #       pip install tox tox-pdm
       - name: Run pdm script
         run: |
-          pdm use --python ${{ steps.setup-python.outputs.python-path }}
+          pdm use ${{ steps.setup-python.outputs.python-path }}
+          pdm run python --version
           pdm run all
 
   deploy:
