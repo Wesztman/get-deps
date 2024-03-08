@@ -73,11 +73,7 @@ all = { composite = [
     "build",
     "_print-success '🎉🎉 All checks passed 🎉🎉'",
 ], help = "Run all tests and checks, as well as building the package" }
-_pipeline-checks = { composite = [
-    "lint",
-    "test --cov src/get_py_deps --cov-report xml --cov-report html --junitxml junit/test-results.xml --no-coverage-upload",
-    "build",
-] }
+
 [tool.ruff]
 src = ["src"]
 
