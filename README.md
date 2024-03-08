@@ -5,8 +5,6 @@
 )
 ![Tested on OS](https://img.shields.io/badge/OS-win%20%7C%20linux%20%7C%20mac-orange)
 [![License](https://img.shields.io/static/v1?label=license&message=MIT&color=success)](./LICENSE)
-[![Last Commit](https://img.shields.io/github/last-commit/Wesztman/brain)](https://github.com/Wesztman/brain/commits/main)
-
 
 A Python module to pretty print a table with the dependencies of a Python package with license and url.
 
