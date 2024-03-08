@@ -10,10 +10,10 @@ repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.2.0
     hooks:
-      # Run the linter.
+      # Linter
       - id: ruff
         args: [--fix]
-      # Run the formatter.
+      # Formatter
       - id: ruff-format
   - repo: https://github.com/Yelp/detect-secrets
     rev: "v1.4.0"
