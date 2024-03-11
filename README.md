@@ -80,7 +80,7 @@ $ pdm run -l
 
 The GitHub Action workflow is set up to run the tests and checks on every push, pr and release.
 
-It runs the `pdm run all` scrips for all supported Python versions on windows, mac and linux.
+It runs the `pdm run all` scripts for all supported Python versions on windows, mac and linux.
 
 When creating a release from a tag (x.y.z), the workflow will also build and push the Python package to PyPi.
 
